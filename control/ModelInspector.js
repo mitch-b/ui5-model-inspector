@@ -1,19 +1,37 @@
-sap.ui.require([
-  'sap/ui/base/Object'
-], function (SAPObject) {
-  "use strict";
+sap.ui.define([
+	"sap/m/Button",
+  "sap/m/ButtonRenderer",
+  "sap/m/ResponsivePopover"
+], function (Button, ButtonRenderer, ResponsivePopover) {
+	"use strict";
+ 
+	var ModelInspectorButton = Button.extend("com.mitchbarry.controls.ModelInspector", {
+ 
+		metadata: {
+			properties: {
+			},
+			aggregations: {
+        _popover: { type: "sap.m.ResponsivePopover", multiple: false, visibility: "hidden" }
+			},
+			events: {
+			}
+		},
+ 
+		init: function () {
+			this.setAggregation("_popover", new ResponsivePopover({
+			}));
+		},
 
-  /**
-   * UI5 ModelInspector
-   * 
-   * Utility for non-productive use
-   * to inspect runtime models. 
-   * 
-   * @author Mitchell Barry
-   */
-  var ModelInspector = SAPObject.extend("com.mitchbarry.ModelInspector", {
+    ontap: function(oEvent) {
+      /* TODO: Show ResponsivePopover */
+      //var oPopover = this.getAggregation('_popover');
+      //oPopover.openBy(this);
+      Button.prototype.ontap.apply(this, arguments);
+    },
+ 
+		renderer: ButtonRenderer.render
+	});
 
-  });
-
-  return ModelInspector;
+  return ModelInspectorButton;
+ 
 });
