@@ -1,0 +1,26 @@
+{
+  "name": "ui5-model-inspector",
+  "description": "Utility for non-productive use to inspect runtime models",
+  "main": "control/ModelInspector.js",
+  "authors": [
+    "Mitchell Barry <mitch.barry+github@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "sap",
+    "ui5",
+    "model",
+    "inspector"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "demo"
+  ]
+}
