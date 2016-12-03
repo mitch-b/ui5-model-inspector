@@ -78,6 +78,9 @@
         }
       }
     },
+    "resourceRoots": {
+      "com.mitchbarry.controls": "../control"
+    },
     "routing": {
       "config": {
         "routerClass": "sap.m.routing.Router",

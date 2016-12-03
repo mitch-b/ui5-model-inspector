@@ -2,6 +2,7 @@
 	controllerName="myCompany.myApp.controller.Worklist"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.m.semantic"
+  xmlns:x="com.mitchbarry.controls"
 	xmlns="sap.m">
 	<semantic:FullscreenPage
 		id="page"
@@ -132,7 +133,11 @@
 					</ColumnListItem>
 				</items>
 			</Table>
+      
 		</semantic:content>
+    <semantic:customFooterContent>
+      <x:ModelInspector text="{i18n>com.mitchbarry.controls.ModelInspector.Button.Text}" />
+    </semantic:customFooterContent>
 		<semantic:sendEmailAction>
 			<semantic:SendEmailAction
 				id="shareEmail"
