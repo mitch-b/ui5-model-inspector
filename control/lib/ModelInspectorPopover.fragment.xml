@@ -1,0 +1,48 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+  xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<ResponsivePopover
+		showHeader="false"
+		contentWidth="400px"
+		contentHeight="500px"
+		placement="Auto" >
+    <content>
+		<NavContainer
+			id="navCon">
+			<Page
+				id="master"
+				title="Model Inspector">
+				<List
+					id="list"
+					items="{__ModelInspector>/Models}" >
+					<StandardListItem
+						title="{__ModelInspector>_Info/DisplayName}"
+						description="{__ModelInspector>_Info/ClassName}"
+						type="Navigation"
+						icon="{__ModelInspector>_Info/IconUri}"
+						press="onInspect"
+						iconDensityAware="false"
+						iconInset="false" />
+				</List>
+			</Page>
+			<Page
+				id="detail"
+				showNavButton="true"
+				navButtonPress="onNavBack"
+				title="{__ModelInspector>/InspectingModel/DisplayName}">
+				<List
+					id="modelProperties"
+					items="{__ModelInspector>/InspectingModel/PropertiesAtDepth}" >
+					<StandardListItem
+            app:Depth="{__ModelInspector>Depth}"
+						type="Active"
+						press="onPropertyPress"
+						iconDensityAware="false"
+						iconInset="false" />
+				</List>
+			</Page>
+		</NavContainer>
+    </content>
+	</ResponsivePopover>
+</core:FragmentDefinition>
