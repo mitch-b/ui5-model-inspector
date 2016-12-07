@@ -11,7 +11,8 @@ sap.ui.define([
       DisplayName: '',
       Model: null,
       IconUri: '',
-      ClassName: ''
+      ClassName: '',
+      BindingMode: ''
     },
 
     constructor: function () {
@@ -56,6 +57,14 @@ sap.ui.define([
 
     getIconUri: function () {
       return this._Info.IconUri;
+    },
+
+    setBindingMode: function (sBindingMode) {
+      this._Info.BindingMode = sBindingMode;
+    },
+
+    getBindingMode: function () {
+      return this._Info.BindingMode;
     }
 
   });

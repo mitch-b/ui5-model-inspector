@@ -49,7 +49,7 @@ sap.ui.define([
         if (sModelName.indexOf('__ModelInspector') === 0) {
           return;
         }
-        var oModelInfo = this._getModelInfo(sModelName);
+        var oModelInfo = this.getModelInfo(sModelName);
         aModels.push($.extend(true, {}, oModelInfo));
       }.bind(this));
       
@@ -97,7 +97,7 @@ sap.ui.define([
      * @param {string} sModelName - Model name to retrieve full information about
      * @returns {com.mitchbarry.controls.lib.ModelInfo} oModelInfo - Model Information
      */
-    _getModelInfo: function(sModelName) {
+    getModelInfo: function(sModelName) {
       var oModelInfo = new ModelInfo();
       var oModel = this.getModel(sModelName);
       var mInfo = this.getObjectInformation(oModel);
@@ -107,6 +107,7 @@ sap.ui.define([
       oModelInfo.setModel(oModel);
       oModelInfo.setClassName(mInfo.ClassName);
       oModelInfo.setIconUri(sIconUri);
+      oModelInfo.setBindingMode(oModel.getDefaultBindingMode());
       return oModelInfo;
     },
 
