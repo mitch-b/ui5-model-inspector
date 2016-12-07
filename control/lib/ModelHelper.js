@@ -21,6 +21,15 @@ sap.ui.define([
       return this._oContext;
     },
 
+    /**
+     * Get Active Models
+     * 
+     * 
+     * 
+     * @param {object} [oContext] - Context object which should provide a .getModel method. 
+     *                              If omitted, context will be retrieved from context set in constructor
+     * @returns {com.mitchbarry.controls.lib.ModelInfo[]} aModels
+     */
     getActiveModels: function (oContext) {
       var aModels = [];
       var aModelNames = [];
@@ -75,6 +84,19 @@ sap.ui.define([
       return $.unique(aModelNames).sort();
     },
 
+    /**
+     * Get Model Info
+     * 
+     * Populates a new ModelInfo object which has information such as:
+     *   - sIconUri
+     *   - Model Class Name
+     * 
+     * This ModelInfo object is what will ultimately be pushed to the 
+     * ModelInspector popover.
+     * 
+     * @param {string} sModelName - Model name to retrieve full information about
+     * @returns {com.mitchbarry.controls.lib.ModelInfo} oModelInfo - Model Information
+     */
     _getModelInfo: function(sModelName) {
       var oModelInfo = new ModelInfo();
       var oModel = this.getModel(sModelName);
@@ -88,13 +110,29 @@ sap.ui.define([
       return oModelInfo;
     },
 
+    /**
+     * Get Model
+     * 
+     * This function will attempt to retrieve the model 
+     * from the context.
+     * 
+     * @param {string} sModelName - name of model to retrieve
+     * @param {object} [oContext] - Context object which should provide a .getModel method. 
+     *                              If omitted, context will be retrieved from context set in constructor
+     * @returns {sap.ui.model.Model} oModel - Model retrieved from Context
+     */
     getModel: function(sModelName, oContext) {
       oContext = oContext || this.getContext();
       if (!oContext) {
-        $.sap.log.warning('com.mitchbarry.controls.ModelInspector: No context available to get model');
+        $.sap.log.error('com.mitchbarry.controls.ModelInspector: No context available to get model');
         return null;
       }
-      return oContext.getModel(sModelName); 
+      var oModel = oContext.getModel(sModelName);
+      if (!oModel) {
+        $.sap.log.error('com.mitchbarry.controls.ModelInspector: Cannot find model ' + sModelName);
+        return null;
+      }
+      return oModel; 
     },
 
     /**
@@ -124,23 +162,18 @@ sap.ui.define([
         mInfo.Id = oObject.getId();
       }
 
-      /* Another, manual way ...
-
-      var oInfoParseRegex = /([a-zA-Z\.]+)\s([a-zA-Z\.]+)#?(.*)?/; // first group: Inherits, second group: ClassName, third group: id
-      
-      var sObjectInfo = oObject.toString();
-      var aParts = sObjectInfo.match(oInfoParseRegex);
-      if (aParts && aParts.length === 4) {
-        mInfo.InheritsFrom = aParts[1];
-        mInfo.ClassName = aParts[2];
-        mInfo.Id = aParts[3];
-      }
-
-      */
-
       return mInfo;
     },
 
+    /**
+     * Get Icon Based on Model Class
+     * 
+     * Depending on type of model (JSON/XML/OData/Resource),
+     * show a different icon in the sap.m.List.
+     * 
+     * @param {string} sClassName - full namespace of class (ex, sap.ui.model.json.JSONModel)
+     * @returns {string} sIconUri - Icon URI to be used by icon attribute of UI object
+     */
     getIconBasedOnModelClass: function(sClassName) {
       var sIcon;
       switch (sClassName) {

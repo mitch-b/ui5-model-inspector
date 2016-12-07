@@ -11,7 +11,7 @@
 		<NavContainer
 			id="navCon">
 			<Page
-				id="master"
+				id="models"
 				title="Model Inspector">
 				<List
 					id="list"
@@ -19,6 +19,7 @@
 					<StandardListItem
 						title="{__ModelInspector>_Info/DisplayName}"
 						description="{__ModelInspector>_Info/ClassName}"
+						app:ModelName="{__ModelInspector>_Info/ModelName}"
 						type="Navigation"
 						icon="{__ModelInspector>_Info/IconUri}"
 						press="onInspect"
@@ -27,15 +28,14 @@
 				</List>
 			</Page>
 			<Page
-				id="detail"
+				id="properties"
 				showNavButton="true"
 				navButtonPress="onNavBack"
 				title="{__ModelInspector>/InspectingModel/DisplayName}">
 				<List
-					id="modelProperties"
+					id="com.mitchbarry.controls.ModelInspector.PropertyList"
 					items="{__ModelInspector>/InspectingModel/PropertiesAtDepth}" >
 					<StandardListItem
-            app:Depth="{__ModelInspector>Depth}"
 						type="Active"
 						press="onPropertyPress"
 						iconDensityAware="false"
