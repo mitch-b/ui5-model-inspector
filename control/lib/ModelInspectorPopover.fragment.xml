@@ -1,11 +1,13 @@
 <core:FragmentDefinition
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt"
   xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<ResponsivePopover
 		showHeader="false"
 		contentWidth="400px"
 		contentHeight="500px"
+		modal="true"
 		placement="Auto" >
     <content>
 		<NavContainer
@@ -14,7 +16,7 @@
 				id="models"
 				title="Model Inspector">
 				<List
-					id="list"
+					id="com.mitchbarry.controls.ModelInspector.ModelList"
 					items="{__ModelInspector>/Models}" >
 					<StandardListItem
 						title="{__ModelInspector>_Info/DisplayName}"
@@ -26,21 +28,40 @@
 						iconDensityAware="false"
 						iconInset="false" />
 				</List>
+				<footer>
+					<Bar>
+						<contentRight>
+							<Button text="Close" press="onClosePopover" />
+						</contentRight>
+					</Bar>
+				</footer>
 			</Page>
 			<Page
 				id="properties"
 				showNavButton="true"
-				navButtonPress="onNavBack"
-				title="{__ModelInspector>/InspectingModel/DisplayName}">
+				navButtonPress="onNavBack">
+				<tnt:ToolHeader>
+					<core:Icon src="{__ModelInspector>/InspectingModel/_Info/IconUri}" />
+					<ToolbarSpacer />
+					<Text text="{__ModelInspector>/InspectingModel/_Info/ClassName}" />
+					<ToolbarSpacer />
+					<Button icon="sap-icon://refresh" press="onModelRefresh" />
+				</tnt:ToolHeader>
 				<List
-					id="com.mitchbarry.controls.ModelInspector.PropertyList"
-					items="{__ModelInspector>/InspectingModel/PropertiesAtDepth}" >
-					<StandardListItem
-						type="Active"
-						press="onPropertyPress"
-						iconDensityAware="false"
-						iconInset="false" />
+					id="com.mitchbarry.controls.ModelInspector.PropertyList">
 				</List>
+				<footer>
+					<Bar>
+						<contentLeft>
+							<core:Icon src="sap-icon://repost" visible="{= ${__ModelInspector>/InspectingModel/_Info/BindingMode} === 'TwoWay'}" />
+							<core:Icon src="sap-icon://navigation-right-arrow" visible="{= ${__ModelInspector>/InspectingModel/_Info/BindingMode} === 'OneWay'}" />
+							<Text class="sapUiSmallMarginBegin" text="{__ModelInspector>/InspectingModel/_Info/BindingMode}" />
+						</contentLeft>
+						<contentRight>
+							<Button text="Close" press="onClosePopover" />
+						</contentRight>
+					</Bar>
+				</footer>
 			</Page>
 		</NavContainer>
     </content>
