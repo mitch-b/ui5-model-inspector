@@ -1,14 +1,19 @@
 {
   "name": "ui5-model-inspector",
-  "description": "Utility for non-productive use to inspect runtime models",
-  "main": "control/ModelInspector.js",
+  "description": "Custom control for non-productive use to inspect runtime models",
+  "main": [
+    "control/ModelInspector.js",
+    "control/lib/ModelInspectorPopover.fragment.xml"
+  ],
   "authors": [
-    "Mitchell Barry <mitch.barry+github@gmail.com>"
+    "Mitchell Barry <mitch.barry+github@gmail.com> (http://mitchbarry.com)"
   ],
   "license": "MIT",
   "keywords": [
     "sap",
     "ui5",
+    "openui5",
+    "sapui5",
     "model",
     "inspector"
   ],
@@ -20,6 +25,10 @@
     "**/.*",
     "node_modules",
     "bower_components",
+    "screenshot.png",
+    "bower.json",
+    "index.html",
+    "README.md",
     "test",
     "demo"
   ]
