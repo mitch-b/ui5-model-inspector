@@ -15,6 +15,8 @@ Ultimately, you wouldn't want to release this custom control into production app
 
 ## Example
 
+> If you want to run the demo locally, please run your HTTP server at the root of this repo. This is required because both the `demo/` folder and the `control/` folder need to be accessible. If ran from within `demo/` then the custom control content cannot be loaded.
+
 ![Screenshot](screenshot.png)
 
 ## Installation
