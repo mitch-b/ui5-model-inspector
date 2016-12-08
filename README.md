@@ -41,7 +41,9 @@ $ bower install ui5-model-inspector
 #### Manual Download (without Bower)
 Download the entire contents of the `control` folder of this repository by downloading ZIP. 
 
-### Step 2 - Copy control assets into your app
+### Step 2 (optional) - Copy control assets into your app
+
+> This is an optional step - skip if you do not need to include the files underneath your web application. In Step 3, you can reference the path as `../bower_components/ui5-model-inspector/control`.
 
 Now that you have the required `.js` and `.xml` files to run this custom control, 
 you'll want to copy them into your application directory so that it is included in your 
