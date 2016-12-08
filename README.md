@@ -20,7 +20,7 @@ So its usage will exist solely in the development and debugging phases of your p
 This is required because both the `demo/` folder and the `control/` folder need to be 
 accessible. If ran from within `demo/` then the custom control content cannot be loaded.
 
-![Screenshot](screenshot.png)
+![Screenshot](http://i.imgur.com/T5cObQs.png)
 
 ## Installation
 
