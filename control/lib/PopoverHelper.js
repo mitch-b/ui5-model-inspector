@@ -150,8 +150,6 @@ sap.ui.define([
       return oPopover;
     },
 
-    
-
     setModelInspector: function (oModelInspector) {
       this._oModelInspector = oModelInspector;
       return this;
@@ -230,8 +228,7 @@ sap.ui.define([
     onPropertyPress: function (oEvent) {
       var sPropertyName = oEvent.getSource().data().PropertyName;
       if (!sPropertyName) {
-        // TODO: add error message
-        $.sap.log.error('');
+        $.sap.log.error('com.mitchbarry.controls.ModelInspector: Unable to parse PropertyName');
         return;
       }
       this.goLowerLevel(sPropertyName);
