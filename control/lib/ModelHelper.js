@@ -7,16 +7,42 @@ sap.ui.define([
   "use strict";
 
   var ModelHelper = UI5Object.extend("com.mitchbarry.controls.lib.ModelHelper", {
+    /**
+     * Context object
+     * @property {object} oContext - Context object where Models can be pulled 
+     */
     _oContext: null,
 
+    /**
+     * constructor
+     * 
+     * When the ModelHelper is created, a Context object 
+     * can optionally be passed in. 
+     * 
+     * @param {object} oContext - View context where Models can be pulled
+     */
     constructor: function (oContext) {
       this.setContext(oContext);
     },
 
+    /**
+     * Set Context
+     * 
+     * Set current view context object so that Models can be pulled
+     * @param {object} oContext - Context object
+     * @returns {com.mitchbarry.controls.lib.ModelHelper} oThis - this object (for method chaining)
+     */
     setContext: function (oContext) {
       this._oContext = oContext;
+      return this;
     },
 
+    /**
+     * Get Context
+     * 
+     * Get current context object where Models can be pulled
+     * @returns {object} oContext - Context object
+     */
     getContext: function () {
       return this._oContext;
     },
@@ -24,7 +50,11 @@ sap.ui.define([
     /**
      * Get Active Models
      * 
+     * Iterate through the context and get information from each Model that is 
+     * available from our current <code>oContext</code> object.
      * 
+     * This function will not include the <code>__ModelInspector</code> model used 
+     * to internally support this custom control.
      * 
      * @param {object} [oContext] - Context object which should provide a .getModel method. 
      *                              If omitted, context will be retrieved from context set in constructor
@@ -102,7 +132,7 @@ sap.ui.define([
       var oModel = this.getModel(sModelName);
       var mInfo = this.getObjectInformation(oModel);
       var sIconUri = this.getIconBasedOnModelClass(mInfo.ClassName);
-      
+
       oModelInfo
         .setModelName(sModelName)
         .setDisplayName(sModelName)
