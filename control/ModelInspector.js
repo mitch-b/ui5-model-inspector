@@ -21,6 +21,16 @@ sap.ui.define([
       }
     },
 
+    /**
+     * init
+     * 
+     * When ModelInspector is started, set this instance to 
+     * the PopoverHelper so that the PopoverHelper can access things like 
+     * the ModelHelper library instance. It is shared so that the Context object 
+     * acquired by the ModelInspector control is shared between all helper 
+     * libraries.
+     * 
+     */
     init: function () {
       this._oPopoverHelper.setModelInspector(this);
     },
