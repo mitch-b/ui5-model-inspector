@@ -17,6 +17,9 @@ sap.ui.define([
     _bIsShown: false,
     _aCurrentPropertyPath: [''], 
     _sCurrentModelName: '',
+    _mDefaultI18nValues: {
+      "com.mitchbarry.controls.ModelInspector.Title": "Model Inspector"
+    },
 
     constructor: function () {
 
@@ -71,6 +74,50 @@ sap.ui.define([
 
     goLowerLevel: function (sPath) {
       this._aCurrentPropertyPath.push(sPath);
+    },
+
+    /**
+     * Get Default i18n Value
+     * 
+     * If an i18n string is not found, this method will 
+     * return a value from <code>this._mDefaultI18nValues</code> 
+     * hashmap of i18n keys and default text values.
+     * 
+     * @param {string} sKey - i18n Key
+     * @returns {string} sText - Default text (if exists), or empty string if not found
+     */
+    getDefaultI18nValue: function(sKey) {
+      var mI18nValues = this._mDefaultI18nValues;
+      if (mI18nValues[sKey]) {
+        return mI18nValues[sKey];
+      } else {
+        $.sap.log.warning('com.mitchbarry.controls.ModelInspector: No default text for ' + sKey);
+        return '';
+      }
+    },
+
+    /**
+     * Get i18n Value
+     * @param {string} sKey - key of i18n text entry
+     * @returns {string} sText - i18n Text (or default value passed in)
+     */
+    getI18nValue: function (sKey) {
+      var sI18nValue = null;
+      var sDefaultText = this.getDefaultI18nValue(sKey);
+      var oContext = this.getContext();
+
+      if (oContext) {
+        var oResourceBundle = oContext.getModel('i18n');
+        if (oResourceBundle) {
+          sI18nValue = oResourceBundle.getProperty(sKey); 
+          if (sI18nValue === sKey) { // ResourceBundle will return key if not found
+            sI18nValue = null;
+          }
+        }
+      } else {
+        $.sap.log.debug('com.mitchbarry.controls.ModelInspector: Not able to acquire ResourceBundle, will use ' + sDefaultText);
+      }
+      return sI18nValue || sDefaultText;
     },
 
     getCurrentModelName: function () {

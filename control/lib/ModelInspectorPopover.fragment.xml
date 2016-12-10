@@ -14,7 +14,7 @@
 			id="navCon">
 			<Page
 				id="models"
-				title="Model Inspector">
+				title="{ parts: ['i18n>com.mitchbarry.controls.ModelInspector.Title'], formatter: '.getI18nValue' }">
 				<List
 					id="com.mitchbarry.controls.ModelInspector.ModelList"
 					items="{__ModelInspector>/Models}" >
