@@ -398,6 +398,7 @@ sap.ui.define([
 
       var oListItem = new InputListItem({
         label: sPropertyName,
+        tooltip: sPropertyName,
         type: sListItemType,
         press: fnOnPress.bind(this),
         content: (oControl) ? [oControl] : []
