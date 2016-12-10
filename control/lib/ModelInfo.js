@@ -21,6 +21,7 @@ sap.ui.define([
 
     setModelName: function (sModelName) {
       this._Info.ModelName = sModelName;
+      return this;
     },
 
     getModelName: function () {
@@ -29,6 +30,7 @@ sap.ui.define([
 
     setDisplayName: function (sDisplayName) {
       this._Info.DisplayName = sDisplayName;
+      return this;
     },
 
     getDisplayName: function () {
@@ -37,6 +39,7 @@ sap.ui.define([
 
     setClassName: function (sClassName) {
       this._Info.ClassName = sClassName;
+      return this;
     },
 
     getClassName: function () {
@@ -45,6 +48,7 @@ sap.ui.define([
 
     setModel: function (oModel) {
       this._Info.Model = oModel;
+      return this;
     },
 
     getModel: function () {
@@ -53,6 +57,7 @@ sap.ui.define([
 
     setIconUri: function (sIconUri) {
       this._Info.IconUri = sIconUri;
+      return this;
     },
 
     getIconUri: function () {
@@ -61,6 +66,7 @@ sap.ui.define([
 
     setBindingMode: function (sBindingMode) {
       this._Info.BindingMode = sBindingMode;
+      return this;
     },
 
     getBindingMode: function () {

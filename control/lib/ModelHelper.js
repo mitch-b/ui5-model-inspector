@@ -45,14 +45,14 @@ sap.ui.define([
         aModelNames = aModelNames.concat(aNames);
       }
 
-      $.each(aNames, function(i, sModelName) {
+      $.each(aNames, function (i, sModelName) {
         if (sModelName.indexOf('__ModelInspector') === 0) {
           return;
         }
         var oModelInfo = this.getModelInfo(sModelName);
         aModels.push($.extend(true, {}, oModelInfo));
       }.bind(this));
-      
+
       return aModels;
     },
 
@@ -97,17 +97,20 @@ sap.ui.define([
      * @param {string} sModelName - Model name to retrieve full information about
      * @returns {com.mitchbarry.controls.lib.ModelInfo} oModelInfo - Model Information
      */
-    getModelInfo: function(sModelName) {
+    getModelInfo: function (sModelName) {
       var oModelInfo = new ModelInfo();
       var oModel = this.getModel(sModelName);
       var mInfo = this.getObjectInformation(oModel);
       var sIconUri = this.getIconBasedOnModelClass(mInfo.ClassName);
-      oModelInfo.setModelName(sModelName);
-      oModelInfo.setDisplayName(sModelName);
-      oModelInfo.setModel(oModel);
-      oModelInfo.setClassName(mInfo.ClassName);
-      oModelInfo.setIconUri(sIconUri);
-      oModelInfo.setBindingMode(oModel.getDefaultBindingMode());
+      
+      oModelInfo
+        .setModelName(sModelName)
+        .setDisplayName(sModelName)
+        .setModel(oModel)
+        .setClassName(mInfo.ClassName)
+        .setIconUri(sIconUri)
+        .setBindingMode(oModel.getDefaultBindingMode());
+
       return oModelInfo;
     },
 
@@ -122,7 +125,7 @@ sap.ui.define([
      *                              If omitted, context will be retrieved from context set in constructor
      * @returns {sap.ui.model.Model} oModel - Model retrieved from Context
      */
-    getModel: function(sModelName, oContext) {
+    getModel: function (sModelName, oContext) {
       oContext = oContext || this.getContext();
       if (!oContext) {
         $.sap.log.error('com.mitchbarry.controls.ModelInspector: No context available to get model');
@@ -133,7 +136,7 @@ sap.ui.define([
         $.sap.log.error('com.mitchbarry.controls.ModelInspector: Cannot find model ' + sModelName);
         return null;
       }
-      return oModel; 
+      return oModel;
     },
 
     /**
@@ -175,7 +178,7 @@ sap.ui.define([
      * @param {string} sClassName - full namespace of class (ex, sap.ui.model.json.JSONModel)
      * @returns {string} sIconUri - Icon URI to be used by icon attribute of UI object
      */
-    getIconBasedOnModelClass: function(sClassName) {
+    getIconBasedOnModelClass: function (sClassName) {
       var sIcon;
       switch (sClassName) {
         case 'sap.ui.model.json.JSONModel':
