@@ -253,23 +253,18 @@ sap.ui.define([
        * @returns {string} sText - i18n Text (or default value passed in)
        */
       getI18nValue: function (sKey) {
-        var sI18nValue = null;
-        var sDefaultText = this.getDefaultI18nValue(sKey);
-        var oContext = this.getContext();
+        var sDefaultText = '';
 
-        if (oContext) {
-          var sI18nModelName = this._getId('i18nModelName');
-          var oResourceBundle = oContext.getModel(sI18nModelName);
-          if (oResourceBundle) {
-            sI18nValue = oResourceBundle.getProperty(sKey);
-            if (sI18nValue === sKey) { // ResourceBundle will return key if not found
-              sI18nValue = null;
-            }
-          }
-        } else {
-          $.sap.log.debug('com.mitchbarry.controls.ModelInspector: Not able to acquire ResourceBundle (missing Context), will use ' + sDefaultText);
+        // if i18n model does not override default property, 
+        // load the default text
+        var aI18nKeys = Object.keys(this._mDefaultI18nValues);
+        if (aI18nKeys.indexOf(sKey) >= 0) {
+          sDefaultText = this.getDefaultI18nValue(sKey);
+          return sDefaultText;
         }
-        return sI18nValue || sDefaultText;
+
+        // else, the XML view will automatically convert i18n value
+        return sKey;
       },
 
       /**
