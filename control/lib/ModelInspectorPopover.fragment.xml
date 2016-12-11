@@ -53,9 +53,9 @@
 				<footer>
 					<Bar>
 						<contentLeft>
-							<core:Icon src="sap-icon://repost" visible="{= ${__ModelInspector>/InspectingModel/_Info/BindingMode} === 'TwoWay'}" />
-							<core:Icon src="sap-icon://navigation-right-arrow" visible="{= ${__ModelInspector>/InspectingModel/_Info/BindingMode} === 'OneWay'}" />
-							<Text class="sapUiSmallMarginBegin" text="{__ModelInspector>/InspectingModel/_Info/BindingMode}" />
+							<Button icon="{= ${__ModelInspector>/InspectingModel/_Info/BindingMode} === 'TwoWay' ? 'sap-icon://repost' : 'sap-icon://navigation-right-arrow' }" 
+								press="onBindingModeChange" 
+								text="{__ModelInspector>/InspectingModel/_Info/BindingMode}" />
 						</contentLeft>
 						<contentRight>
 							<Button text="Close" press="onClosePopover" />

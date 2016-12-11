@@ -3,8 +3,9 @@ sap.ui.define([
   'sap/ui/base/Object',
   'sap/ui/model/json/JSONModel',
   'sap/m/InputListItem',
-  'sap/ui/core/Fragment'
-], function ($, UI5Object, JSONModel, InputListItem, Fragment) {
+  'sap/ui/core/Fragment',
+  'sap/ui/model/BindingMode'
+], function ($, UI5Object, JSONModel, InputListItem, Fragment, BindingMode) {
   "use strict";
 
   /**
@@ -470,6 +471,10 @@ sap.ui.define([
         }
         var oPopover = this.getPopoverControl();
         oPopover.openBy(oControl);
+        if (this.getCurrentModelName()) {
+          this._setInspectingModel(this.getCurrentModelName());
+          this._loadPropertiesAtDepth()
+        }
         return this;
       },
 
@@ -498,9 +503,7 @@ sap.ui.define([
       onInspect: function (oEvent) {
         var sModelName = oEvent.getSource().data().ModelName;
         this.setCurrentModelName(sModelName);
-        var oPopoverModel = this.getPopoverModel();
-        var oModelHelper = this.getModelHelper();
-        oPopoverModel.setProperty('/InspectingModel', oModelHelper.getModelInfo(sModelName));
+        this._setInspectingModel(sModelName);
         this._loadPropertiesAtDepth();
         this._setPropertyTitle(this.getCurrentPropertyPath(true));
         this._navigateTo('properties');
@@ -538,6 +541,38 @@ sap.ui.define([
       onModelRefresh: function (oEvent) {
         var oModelHelper = this.getModelHelper();
         oModelHelper.getModel(this.getCurrentModelName()).refresh(true);
+        this._loadPropertiesAtDepth();
+      },
+
+      /**
+       * onBindingModeChange
+       * 
+       * When user clicks the BindingMode button, allow toggling 
+       * between OneWay and TwoWay binding modes. 
+       * 
+       * @event
+       */
+      onBindingModeChange: function (oEvent) {
+        var oModelHelper = this.getModelHelper();
+        var sModelName = this.getCurrentModelName();
+        var oModel = oModelHelper.getModel(sModelName);
+        var oPopoverModel = this.getPopoverModel();
+        switch (oModel.getDefaultBindingMode()) {
+          case BindingMode.TwoWay: 
+            oModel.setDefaultBindingMode(BindingMode.OneWay);
+            break;
+          case BindingMode.OneWay:
+            oModel.setDefaultBindingMode(BindingMode.TwoWay);
+            break;
+          default:
+            break;
+        }
+
+        oModel.refresh(true);
+        this._setInspectingModel(sModelName);
+
+        this._loadPropertiesAtDepth();
+        return;
       },
 
       /**
@@ -549,6 +584,23 @@ sap.ui.define([
        */
       onClosePopover: function (oEvent) {
         this.getPopoverControl().close();
+      },
+
+      /**
+       * Set Inspecting Model
+       * 
+       * @param {string} sModelName - Model name to set as InspectingModel 
+       * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       */
+      _setInspectingModel: function (sModelName) {
+        var oPopoverModel = this.getPopoverModel();
+        var oModelHelper = this.getModelHelper();
+        var oModelInfo = oModelHelper.getModelInfo(sModelName);
+        var oPopoverModelData = oPopoverModel.getProperty('/');
+        oPopoverModelData.InspectingModel = oModelInfo;
+        oPopoverModel.setProperty('/', oPopoverModelData);
+        oPopoverModel.refresh(true);
+        return this;
       },
 
       /**
