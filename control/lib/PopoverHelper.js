@@ -620,7 +620,7 @@ sap.ui.define([
         var sModelName = this.getCurrentModelName();
         var oModelHelper = this.getModelHelper();
         var oModel = oModelHelper.getModel(sModelName);
-        var oModelData = oModel.getProperty(this.getCurrentPropertyPath(false));
+        var oModelData = this._getDataFromModel(sModelName);
         var aProperties = this._getControlArray(oModelData);
 
         var oPropertiesPage = Fragment.byId(sFragmentId, sPropertyPageId);
@@ -631,6 +631,41 @@ sap.ui.define([
         }
 
         return this;
+      },
+
+      /**
+       * Get Data from Model
+       * 
+       * Since models need to have their data retrieved differently based on type
+       * (ResourceBundle for example), abstract that from main logic sequence 
+       * by calling this method. 
+       * 
+       * @param {string} sModelName - model name to pull data from current property path
+       * @returns {value} vData - data from model at CurrentPropertyPath
+       */
+      _getDataFromModel: function (sModelName) {
+        var vData = null;
+        var oModelHelper = this.getModelHelper();
+        var oModel = oModelHelper.getModel(sModelName);
+        var mInfo = oModelHelper.getModelInfo(sModelName);
+        var sPropertyPath = this.getCurrentPropertyPath(false);
+
+        switch (mInfo._Info.ClassName) {
+          case 'sap.ui.model.resource.ResourceModel':
+            vData = {};
+            for (var i = 0; i < oModel.aBindings.length; i++) {
+              var oEntry = oModel.aBindings[i];
+              var sKey, sValue;
+              sKey = oEntry.sPath;
+              sValue = oEntry.oValue;
+              vData[sKey] = sValue; 
+            }
+            break;
+          default:
+            vData = oModel.getProperty(sPropertyPath);
+            break;
+        }
+        return vData;
       },
 
       /**
@@ -672,8 +707,12 @@ sap.ui.define([
        */
       _createListItemFromProperty: function (sPropertyName, vProperty) {
         var sModelName = this.getCurrentModelName();
+        var oModelHelper = this.getModelHelper();
+        var mModelInfo = oModelHelper.getModelInfo(sModelName);
+
         var sPropertyPath = this.getCurrentPropertyPath(true);
         var oControl = null;
+        var sSeparator = '/';
         var sListItemType = 'Inactive';
         var fnOnPress = function () { };
 
@@ -682,7 +721,12 @@ sap.ui.define([
           sPropertyPath = sPropertyPath.slice(0, -1);
         }
 
-        var sPropertyBindingPath = '{' + sPropertyPath + '/' + sPropertyName + '}';
+        // do not add slash if sap.ui.model.resource.ResourceModel
+        if (mModelInfo._Info.ClassName === 'sap.ui.model.resource.ResourceModel') {
+          sSeparator = '';
+        }
+
+        var sPropertyBindingPath = '{' + sPropertyPath + sSeparator + sPropertyName + '}';
 
         switch (typeof vProperty) {
           case "function":
@@ -725,6 +769,7 @@ sap.ui.define([
           content: (oControl) ? [oControl] : []
         });
         oListItem.data('PropertyName', sPropertyName);
+        oListItem.data('PropertyPath', sPropertyBindingPath);
 
         return oListItem;
       }
