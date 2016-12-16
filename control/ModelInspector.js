@@ -22,6 +22,7 @@ sap.ui.define([
     {
       _oModelHelper: new ModelHelper(),
       _oPopoverHelper: new PopoverHelper(),
+      _sId: '',
 
       metadata: {
         properties: {
@@ -44,44 +45,45 @@ sap.ui.define([
        * 
        */
       init: function () {
-        this._oPopoverHelper.setModelInspector(this);
       },
 
       /**
        * Get instance of ModelHelper library
+       * 
+       * @param {object} [oContext] - Context object
        * @returns {com.mitchbarry.controls.lib.ModelHelper} oModelHelper - ModelHelper library
        */
-      getModelHelper: function () {
+      getModelHelper: function (oContext) {
+        if (oContext) {
+          this._oModelHelper.setContext(oContext);
+        }
         return this._oModelHelper;
       },
 
       /**
        * Get instance of PopoverHelper library
+       * 
+       * @param {object} [oContext] - Context object
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oPopoverHelper - PopoverHelper library
        */
-      getPopoverHelper: function () {
+      getPopoverHelper: function (oContext) {
+        if (oContext) {
+          this._oPopoverHelper.setContext(oContext);
+          this._oPopoverHelper.setModelInspector(oContext);
+        }
         return this._oPopoverHelper;
       },
 
       /**
        * On Tap event fired
        * 
-       * 
        * @param {sap.ui.base.Event} oEvent - Event information
        * @event
        */
       ontap: function (oEvent) {
         var oContext = this;
-        var oModelHelper = this.getModelHelper();
-        var oPopoverHelper = this.getPopoverHelper();
-
-        /* Initialize Helpers */
-        if (!oModelHelper.getContext()) {
-          oModelHelper.setContext(oContext);
-        }
-        if (!oPopoverHelper.getContext()) {
-          oPopoverHelper.setContext(oContext);
-        }
+        var oModelHelper = this.getModelHelper(oContext);
+        var oPopoverHelper = this.getPopoverHelper(oContext);
 
         var aModels = oModelHelper.getActiveModels();
 

@@ -188,6 +188,20 @@ sap.ui.define([
       },
 
       /**
+       * Reset Property Path
+       * @function
+       * 
+       * Used when Popover is closed to ensure
+       * a clean exit (and a clean re-entry on re-open)
+       * 
+       * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       */
+      _resetPropertyPath: function () {
+        this._aCurrentPropertyPath = [''];
+        return this;
+      },
+
+      /**
        * Go Upper Level
        * @function
        * 
@@ -545,6 +559,8 @@ sap.ui.define([
        * When user clicks the BindingMode button, allow toggling 
        * between OneWay and TwoWay binding modes. 
        * 
+       * Models are refreshed, properties are reloaded.
+       * 
        * @event
        */
       onBindingModeChange: function (oEvent) {
@@ -578,7 +594,9 @@ sap.ui.define([
        * @event
        */
       onClosePopover: function (oEvent) {
-        this.getPopoverControl().close();
+        this._resetPropertyPath();
+        this.getPopoverModel().destroy();
+        this.getPopoverControl().destroy();
       },
 
       /**
