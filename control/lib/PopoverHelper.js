@@ -632,7 +632,6 @@ sap.ui.define([
       _loadPropertiesAtDepth: function () {
         var sFragmentId = this._getId('FragmentId');
         var sPropertyListId = this._getId('PropertyListId');
-        var sPropertyPageId = this._getId('PropertyPageId');
 
         var oPropertyList = Fragment.byId(sFragmentId, sPropertyListId);
         var sModelName = this.getCurrentModelName();
@@ -641,7 +640,8 @@ sap.ui.define([
         var oModelData = this._getDataFromModel(sModelName);
         var aProperties = this._getControlArray(oModelData);
 
-        var oPropertiesPage = Fragment.byId(sFragmentId, sPropertyPageId);
+        aProperties.sort(this._sortPropertyListAlphabetically);
+
         oPropertyList.destroyItems();
 
         for (var i = 0; i < aProperties.length; i++) {
@@ -649,6 +649,29 @@ sap.ui.define([
         }
 
         return this;
+      },
+
+      /**
+       * Sort Property List (Alphabetically)
+       * @function
+       * 
+       * Sorter function to place items in property list in order.
+       * Uses <code>sap.m.InputListItem.getLabel()</code> to sort.
+       * 
+       * @param {sap.m.InputListItem} a - First item in sort function
+       * @param {sap.m.InputListItem} b - Second item in sort function
+       * @returns {int} iPosition - JavaScript sort function return value
+       */
+      _sortPropertyListAlphabetically: function (a, b) {
+        var sALabel = a.getLabel().toLowerCase();
+        var sBLabel = b.getLabel().toLowerCase();
+        if (sALabel < sBLabel) {
+          return -1;
+        }
+        if (sALabel > sBLabel) {
+          return 1;
+        }
+        return 0;
       },
 
       /**
