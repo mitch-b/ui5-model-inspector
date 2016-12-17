@@ -12,15 +12,19 @@
 			data-sap-ui-libs="sap.m"
 			data-sap-ui-theme="sap_belize"
 			data-sap-ui-compatVersion="edge"
-			data-sap-ui-resourceroots='{"myCompany.myApp": "./"}'>
+			data-sap-ui-resourceroots='{"myCompany.myApp": "../demo"}'
+			data-sap-ui-frameOptions='allow'> 	// NON-SECURE setting for testing environment
 	</script>
 
 	<script>
 		sap.ui.getCore().attachInit(function () {
 			sap.ui.require([
+				"myCompany/myApp/localService/mockserver",
 				"sap/m/Shell",
 				"sap/ui/core/ComponentContainer"
-			], function (Shell, ComponentContainer) {
+			], function (server, Shell, ComponentContainer) {
+				// set up test service for local testing
+				server.init();
 				// initialize the UI component
 				new Shell({
 					app: new ComponentContainer({
