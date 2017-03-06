@@ -32,10 +32,6 @@ sap.ui.define([
         BindingMode: ''
       },
 
-      constructor: function () {
-
-      },
-
       setModelName: function (sModelName) {
         this._Info.ModelName = sModelName;
         return this;
