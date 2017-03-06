@@ -27,19 +27,6 @@ sap.ui.define([
       _oContext: null,
 
       /**
-       * constructor
-       * 
-       * When the ModelHelper is created, a Context object 
-       * can optionally be passed in. 
-       * 
-       * @constructor
-       * @param {object} oContext - View context where Models can be pulled
-       */
-      constructor: function (oContext) {
-        this.setContext(oContext);
-      },
-
-      /**
        * Set Context
        * 
        * Set current view context object so that Models can be pulled
@@ -258,7 +245,7 @@ sap.ui.define([
             break;
         }
         return IconPool.getIconURI(sIcon);
-      } 
+      }
 
     });
 
