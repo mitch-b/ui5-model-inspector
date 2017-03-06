@@ -95,13 +95,14 @@ sap.ui.define([
 
       /**
        * Set Context
-       * @function
        * 
        * Set current view context object so that internal JSONModel can be assigned to it.
        * When assigned, the JSONModel is registered to it.
        * 
        * @param {object} oContext - Context object
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       * 
+       * @function
        */
       setContext: function (oContext) {
         this._oContext = oContext;
@@ -114,10 +115,11 @@ sap.ui.define([
 
       /**
        * Get Context
-       * @function
        * 
        * Get current context object where Models can be pulled
        * @returns {object} oContext - Context object
+       * 
+       * @function
        */
       getContext: function () {
         return this._oContext;
@@ -125,11 +127,12 @@ sap.ui.define([
 
       /**
        * Get Id
-       * @function
        * 
        * Provide access to [_mIds]{@link com.mitchbarry.controls.lib.PopoverHelper._mIds}
        * 
        * @returns {string} sId - Id of object, or empty string if not found 
+       * 
+       * @function
        */
       _getId: function (sEntry) {
         var sId = this._mIds[sEntry];
@@ -141,9 +144,10 @@ sap.ui.define([
 
       /**
        * Get Current Depth
-       * @function
        * 
        * @property {int} iCurrentDepth - return length of [_aCurrentPropertyPath]{@link com.mitchbarry.controls.lib.PopoverHelper._aCurrentPropertyPath}
+       * 
+       * @function
        */
       getCurrentDepth: function () {
         return this._aCurrentPropertyPath.length;
@@ -151,7 +155,6 @@ sap.ui.define([
 
       /**
        * Get Current Property Path
-       * @function
        * 
        * Return a proper path string based on current depth of selected model. The returned path 
        * is intended for use by <code>model.getProperty(sPropertyPath)</code>.
@@ -166,6 +169,8 @@ sap.ui.define([
        * 
        * @param {boolean} [bIncludeModelPrefix] - If true, preface property path with "modelName>"
        * @returns {string} sPropertyPath - Path to currently selected property in Popover
+       * 
+       * @function
        */
       getCurrentPropertyPath: function (bIncludeModelPrefix) {
         var sPath = '';
@@ -189,12 +194,13 @@ sap.ui.define([
 
       /**
        * Reset Property Path
-       * @function
        * 
        * Used when Popover is closed to ensure
        * a clean exit (and a clean re-entry on re-open)
        * 
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       * 
+       * @function
        */
       _resetPropertyPath: function () {
         this._aCurrentPropertyPath = [''];
@@ -203,13 +209,14 @@ sap.ui.define([
 
       /**
        * Go Upper Level
-       * @function
        * 
        * When user clicks on the back arrow in the Popover, we need to "up a level" 
        * in our model. We will pop an entry off the [_aCurrentPropertyPath]{@link com.mitchbarry.controls.lib.PopoverHelper._aCurrentPropertyPath}
        * array, and update the title of the Popover with output of [getCurrentPropertyPath(true)]{@link com.mitchbarry.controls.lib.PopoverHelper.getCurrentPropertyPath}.
        * 
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       * 
+       * @function
        */
       goUpperLevel: function (iDepth) {
         if (this._aCurrentPropertyPath.length > 1) {
@@ -223,13 +230,14 @@ sap.ui.define([
 
       /**
        * Go Lower Level
-       * @function
        * 
        * When user clicks into an object property in the Popover, we need to "down a level" 
        * in our model. Push selected property name into 
        * [_aCurrentPropertyPath]{@link com.mitchbarry.controls.lib.PopoverHelper._aCurrentPropertyPath}.
        * 
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       * 
+       * @function
        */
       goLowerLevel: function (sPath) {
         this._aCurrentPropertyPath.push(sPath);
@@ -238,7 +246,6 @@ sap.ui.define([
 
       /**
        * Get Default i18n Value
-       * @function
        * 
        * If an i18n string is not found, this method will 
        * return a value from <code>this._mDefaultI18nValues</code> 
@@ -246,6 +253,8 @@ sap.ui.define([
        * 
        * @param {string} sKey - i18n Key
        * @returns {string} sText - Default text (if exists), or empty string if not found
+       * 
+       * @function
        */
       getDefaultI18nValue: function (sKey) {
         var mI18nValues = this._mDefaultI18nValues;
@@ -258,13 +267,14 @@ sap.ui.define([
 
       /**
        * Get i18n Value
-       * @function
        * 
        * In order to retrieve valid i18n value, the ResourceBundle model 
        * should have name 'i18n'.
        * 
        * @param {string} sKey - key of i18n text entry
        * @returns {string} sText - i18n Text (or default value passed in)
+       * 
+       * @function
        */
       getI18nValue: function (sKey) {
         var sDefaultText = '';
@@ -283,9 +293,10 @@ sap.ui.define([
 
       /**
        * Get Current Model Name
-       * @function
        * 
        * @returns {string} sCurrentModelName - currently selected model
+       * 
+       * @function
        */
       getCurrentModelName: function () {
         return this._sCurrentModelName;
@@ -293,10 +304,11 @@ sap.ui.define([
 
       /**
        * Set Current Model Name
-       * @function
        * 
        * @param {string} sModelName - currently selected model
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       * 
+       * @function
        */
       setCurrentModelName: function (sModelName) {
         this._sCurrentModelName = sModelName;
@@ -305,11 +317,12 @@ sap.ui.define([
 
       /**
        * Get NavContainer
-       * @function
        * 
        * Get instance of NavContainer from Popover
        * 
        * @returns {sap.m.NavContainer} oNavCon - instance of NavContainer
+       * 
+       * @function
        */
       _getNavContainer: function () {
         var sNavConId = this._getId('NavContainerId');
@@ -320,10 +333,11 @@ sap.ui.define([
 
       /**
        * Navigate To
-       * @function
        * 
        * @param {string} sPageId - Id of page to navigate the internally used Popover's Navigation Container to
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       * 
+       * @function
        */
       _navigateTo: function (sPageId) {
         var sFragmentId = this._getId('FragmentId');
@@ -340,12 +354,13 @@ sap.ui.define([
 
       /**
        * Set Property Title
-       * @function
        * 
        * Typically used to set property path in title area.
        * 
        * @param {string} sTitle - title to set on Popover page
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       * 
+       * @function 
        */
       _setPropertyTitle: function (sTitle) {
         var sFragmentId = this._getId('FragmentId');
@@ -357,13 +372,14 @@ sap.ui.define([
 
       /**
        * Get Popover Control
-       * @function
        * 
        * Retrieve the ResponsivePopover control from the 
        * _popover aggregation found from the custom object 
        * ModelInspector.
        * 
        * @returns {sap.m.ResponsivePopover} oResponsivePopover - The ResponsivePopover object from the ModelInspector control.
+       * 
+       * @function 
        */
       getPopoverControl: function () {
         var oModelInspector = this.getModelInspector();
@@ -388,13 +404,14 @@ sap.ui.define([
 
       /**
        * Set ModelInspector
-       * @function
        * 
        * This method is called by [ModelInspector.constructor]{@link com.mitchbarry.controls.ModelInspector.constructor} to 
        * allow this library to have access to the ModelInspector's own [ModelHelper]{@link com.mitchbarry.controls.lib.ModelHelper} instance.
        * 
        * @param {com.mitchbarry.controls.ModelInspector} oModelInspector - primary instance of ModelInspector
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       * 
+       * @function 
        */
       setModelInspector: function (oModelInspector) {
         this._oModelInspector = oModelInspector;
@@ -403,9 +420,10 @@ sap.ui.define([
 
       /**
        * Get Model Inspector
-       * @function
        * 
        * @returns {com.mitchbarry.controls.ModelInspector} oModelInspector - primary instance of ModelInspector
+       * 
+       * @function 
        */
       getModelInspector: function () {
         return this._oModelInspector;
@@ -413,10 +431,11 @@ sap.ui.define([
 
       /**
        * Set Popover Model
-       * @function
        * 
        * @param {sap.ui.model.json.JSONModel} oModel - JSONModel used to populate data for the Popover control
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       * 
+       * @function 
        */
       setPopoverModel: function (oModel) {
         var sPopoverModelName = this._getId('PopoverModelName');
@@ -427,11 +446,12 @@ sap.ui.define([
 
       /**
        * Get Popover Model
-       * @function
        * 
        * Grabs Popover Model from [.getContext]{@link com.mitchbarry.controls.lib.PopoverHelper.getContext}
        * 
        * @returns {sap.ui.model.json.JSONModel} oModel - JSONModel used to populate data for the Popover control
+       * 
+       * @function 
        */
       getPopoverModel: function () {
         var sPopoverModelName = this._getId('PopoverModelName');
@@ -442,6 +462,8 @@ sap.ui.define([
        * Get Model Helper
        * 
        * @returns {com.mitchbarry.controls.lib.ModelHelper} oModelHelper - instance of ModelHelper
+       * 
+       * @function 
        */
       getModelHelper: function () {
         return this.getModelInspector().getModelHelper();
@@ -455,6 +477,8 @@ sap.ui.define([
        * 
        * @param {com.mitchbarry.controls.lib.ModelInfo[]} aModels - Model information to populate view
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       * 
+       * @function 
        */
       setModels: function (aModels) {
         if (aModels.length >= 0) {
@@ -472,6 +496,8 @@ sap.ui.define([
        *  
        * @param {sap.ui.core.Control} oControl - control instance to open Popover next to
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       * 
+       * @function 
        */
       openBy: function (oControl) {
         if (!oControl) {
@@ -489,6 +515,7 @@ sap.ui.define([
 
       /**
        * When user clicks back button
+       * 
        * @event
        */
       onNavBack: function (oEvent) {
@@ -604,6 +631,8 @@ sap.ui.define([
        * 
        * @param {string} sModelName - Model name to set as InspectingModel 
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       * 
+       * @function 
        */
       _setInspectingModel: function (sModelName) {
         var oPopoverModel = this.getPopoverModel();
@@ -618,7 +647,6 @@ sap.ui.define([
 
       /**
        * Load Properties (at Depth)
-       * @function
        * 
        * This method will:
        *   - Get sap.m.List from Popover holding property list items
@@ -628,6 +656,8 @@ sap.ui.define([
        *   - Iterate though sap.m.InputListItem objects and add them to the sap.m.List
        * 
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oThis - Reference to <code>this</code> in order to allow method chaining
+       * 
+       * @function 
        */
       _loadPropertiesAtDepth: function () {
         var sFragmentId = this._getId('FragmentId');
@@ -653,7 +683,6 @@ sap.ui.define([
 
       /**
        * Sort Property List (Alphabetically)
-       * @function
        * 
        * Sorter function to place items in property list in order.
        * Uses <code>sap.m.InputListItem.getLabel()</code> to sort.
@@ -661,6 +690,8 @@ sap.ui.define([
        * @param {sap.m.InputListItem} a - First item in sort function
        * @param {sap.m.InputListItem} b - Second item in sort function
        * @returns {int} iPosition - JavaScript sort function return value
+       * 
+       * @function 
        */
       _sortPropertyListAlphabetically: function (a, b) {
         var sALabel = a.getLabel().toLowerCase();
@@ -683,6 +714,8 @@ sap.ui.define([
        * 
        * @param {string} sModelName - model name to pull data from current property path
        * @returns {value} vData - data from model at CurrentPropertyPath
+       * 
+       * @function 
        */
       _getDataFromModel: function (sModelName) {
         var vData = null;
@@ -711,7 +744,6 @@ sap.ui.define([
 
       /**
        * Get Control Array
-       * @function
        * 
        * This method will:
        *   - Load selected model data and iterate through each property in it
@@ -719,6 +751,8 @@ sap.ui.define([
        * 
        * @param {object} oModelData - data from current model object (at property depth)
        * @returns {sap.m.InputListItem[]} aCurrentDepthProperties - List of InputListItem controls to render in view
+       * 
+       * @function 
        */
       _getControlArray: function (oModelData) {
         var aCurrentDepthProperties = [];
@@ -736,7 +770,6 @@ sap.ui.define([
 
       /**
        * Create List Item From Property
-       * @function
        * 
        * Based on the property's type, build a new control of <code>sap.m.InputListItem</code> 
        * to display (but allow modification if TwoWay binding enabled) the property in a 
@@ -745,6 +778,8 @@ sap.ui.define([
        * @param {string} sPropertyName - Property Name currently visualizing as an sap.m.InputListItem
        * @param {object} vProperty - value of property (of any type)
        * @returns {sap.m.InputListItem} oListItem - Control to render in view with current property data
+       * 
+       * @function 
        */
       _createListItemFromProperty: function (sPropertyName, vProperty) {
         var sModelName = this.getCurrentModelName();
