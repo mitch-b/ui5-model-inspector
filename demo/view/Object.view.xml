@@ -92,7 +92,10 @@
 			</Panel>
 		</semantic:content>
     <semantic:customFooterContent>
-      <x:ModelInspector text="{i18n>com.mitchbarry.controls.ModelInspector.Button.Text}" />
+      <x:ModelInspector 
+	  	icon="sap-icon://source-code" 
+		type="Emphasized"
+		text="{i18n>com.mitchbarry.controls.ModelInspector.Button.Text}" />
     </semantic:customFooterContent>
 		<semantic:sendEmailAction>
 			<semantic:SendEmailAction

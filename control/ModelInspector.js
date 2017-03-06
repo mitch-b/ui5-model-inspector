@@ -35,23 +35,12 @@ sap.ui.define([
       },
 
       /**
-       * init
-       * 
-       * When ModelInspector is started, set this instance to 
-       * the PopoverHelper so that the PopoverHelper can access things like 
-       * the ModelHelper library instance. It is shared so that the Context object 
-       * acquired by the ModelInspector control is shared between all helper 
-       * libraries.
-       * 
-       */
-      init: function () {
-      },
-
-      /**
        * Get instance of ModelHelper library
        * 
        * @param {object} [oContext] - Context object
        * @returns {com.mitchbarry.controls.lib.ModelHelper} oModelHelper - ModelHelper library
+       * 
+       * @function 
        */
       getModelHelper: function (oContext) {
         if (oContext) {
@@ -65,6 +54,8 @@ sap.ui.define([
        * 
        * @param {object} [oContext] - Context object
        * @returns {com.mitchbarry.controls.lib.PopoverHelper} oPopoverHelper - PopoverHelper library
+       * 
+       * @function 
        */
       getPopoverHelper: function (oContext) {
         if (oContext) {
@@ -78,6 +69,7 @@ sap.ui.define([
        * On Tap event fired
        * 
        * @param {sap.ui.base.Event} oEvent - Event information
+       * 
        * @event
        */
       ontap: function (oEvent) {
