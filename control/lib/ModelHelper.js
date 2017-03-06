@@ -41,11 +41,12 @@ sap.ui.define([
 
       /**
        * Set Context
-       * @function
        * 
        * Set current view context object so that Models can be pulled
        * @param {object} oContext - Context object
        * @returns {com.mitchbarry.controls.lib.ModelHelper} oThis - this object (for method chaining)
+       * 
+       * @function
        */
       setContext: function (oContext) {
         this._oContext = oContext;
@@ -54,10 +55,11 @@ sap.ui.define([
 
       /**
        * Get Context
-       * @function
        * 
        * Get current context object where Models can be pulled
        * @returns {object} oContext - Context object
+       * 
+       * @function
        */
       getContext: function () {
         return this._oContext;
@@ -65,7 +67,6 @@ sap.ui.define([
 
       /**
        * Get Active Models
-       * @function
        * 
        * Iterate through the context and get information from each Model that is 
        * available from our current <code>oContext</code> object.
@@ -76,6 +77,8 @@ sap.ui.define([
        * @param {object} [oContext] - Context object which should provide a .getModel method. 
        *                              If omitted, context will be retrieved from context set in constructor
        * @returns {com.mitchbarry.controls.lib.ModelInfo[]} aModels
+       * 
+       * @function
        */
       getActiveModels: function (oContext) {
         var aModels = [];
@@ -105,7 +108,6 @@ sap.ui.define([
 
       /**
        * Get model names from context object
-       * @function
        * 
        * Use UI5 internal properties to identify models available
        * to inspect. Since there is no public API to retrieve these 
@@ -114,6 +116,8 @@ sap.ui.define([
        * 
        * @param {sap.ui.base} oContext - Context object to inspect for available models
        * @returns {string[]} aModelNames - models available within provided context 
+       * 
+       * @function
        */
       _getModelNamesFromContext: function (oContext) {
         var aModelNames = [];
@@ -134,7 +138,6 @@ sap.ui.define([
 
       /**
        * Get Model Info
-       * @function
        * 
        * Populates a new ModelInfo object which has information such as:
        *   - sIconUri
@@ -145,6 +148,8 @@ sap.ui.define([
        * 
        * @param {string} sModelName - Model name to retrieve full information about
        * @returns {com.mitchbarry.controls.lib.ModelInfo} oModelInfo - Model Information
+       * 
+       * @function
        */
       getModelInfo: function (sModelName) {
         var oModelInfo = new ModelInfo();
@@ -165,7 +170,6 @@ sap.ui.define([
 
       /**
        * Get Model
-       * @function
        * 
        * This function will attempt to retrieve the model 
        * from the context.
@@ -174,6 +178,8 @@ sap.ui.define([
        * @param {object} [oContext] - Context object which should provide a .getModel method. 
        *                              If omitted, context will be retrieved from context set in constructor
        * @returns {sap.ui.model.Model} oModel - Model retrieved from Context
+       * 
+       * @function
        */
       getModel: function (sModelName, oContext) {
         oContext = oContext || this.getContext();
@@ -191,12 +197,13 @@ sap.ui.define([
 
       /**
        * Get Model Information
-       * @function
        * 
        * Useful to determine what type of model the user is inspecting.
        * 
        * @param {sap.ui.base.Object} oObject - Object to pull information for
        * @returns {hashmap} mInfo - Information about object with properties: ClassName, Id, Icon
+       * 
+       * @function
        */
       getObjectInformation: function (oObject) {
         var mInfo = {
@@ -222,13 +229,14 @@ sap.ui.define([
 
       /**
        * Get Icon Based on Model Class
-       * @function
        * 
        * Depending on type of model (JSON/XML/OData/Resource),
        * show a different icon in the sap.m.List.
        * 
        * @param {string} sClassName - full namespace of class (ex, sap.ui.model.json.JSONModel)
        * @returns {string} sIconUri - Icon URI to be used by icon attribute of UI object
+       * 
+       * @function
        */
       getIconBasedOnModelClass: function (sClassName) {
         var sIcon;
@@ -250,7 +258,7 @@ sap.ui.define([
             break;
         }
         return IconPool.getIconURI(sIcon);
-      }
+      } 
 
     });
 
