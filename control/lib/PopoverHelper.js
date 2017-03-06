@@ -85,15 +85,6 @@ sap.ui.define([
       },
 
       /**
-       * constructor
-       * 
-       * @constructor
-       */
-      constructor: function () {
-
-      },
-
-      /**
        * Set Context
        * 
        * Set current view context object so that internal JSONModel can be assigned to it.
@@ -596,7 +587,7 @@ sap.ui.define([
         var oModel = oModelHelper.getModel(sModelName);
         var oPopoverModel = this.getPopoverModel();
         switch (oModel.getDefaultBindingMode()) {
-          case BindingMode.TwoWay: 
+          case BindingMode.TwoWay:
             oModel.setDefaultBindingMode(BindingMode.OneWay);
             break;
           case BindingMode.OneWay:
@@ -732,7 +723,7 @@ sap.ui.define([
               var sKey, sValue;
               sKey = oEntry.sPath;
               sValue = oEntry.oValue;
-              vData[sKey] = sValue; 
+              vData[sKey] = sValue;
             }
             break;
           default:
