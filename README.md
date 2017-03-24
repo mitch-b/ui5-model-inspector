@@ -16,7 +16,7 @@ So its usage will exist solely in the development and debugging phases of your p
 
 ## Example
 
-###[View on GitHub Pages](https://mitch-b.github.io/ui5-model-inspector/demo/)
+### [View on GitHub Pages](https://mitch-b.github.io/ui5-model-inspector/demo/)
 
 > If you want to run the demo locally, please run your HTTP server at the root of this repo. 
 This is required because both the `demo/` folder and the `control/` folder need to be 
